@@ -1,19 +1,24 @@
 import { Link } from "react-router-dom";
 import { CardProps } from "src/common/types/CartProps";
 import { formatter } from "src/util/formatCurrency";
+import Card from "react-bootstrap/Card";
 
-const Card = ({ ...props }: CardProps) => {
+const CardProduct = (props: CardProps) => {
     return (
-        <div className={`card ${props.className}`} id={`card_${props.id}`}>
-            <img className="card-img-top" src={props.data.logo} alt="Title" />
-            <div className="card-body">
+        <Card className={`card ${props.className}`} id={`card_${props.id}`}>
+            <Card.Img variant="top" src={props.data.logo} alt="Title" />
+            <Card.Body>
                 <hr />
-                <Link className="card-title h5 text-decoration-none" to={"/product?id=" + props.data.id}>{props.data.name}</Link>
-            </div>
-            <div className="card-footer">
-                <p className="card-text">Giá: {formatter.format(props.data.price)}</p>
-            </div>
-        </div>
+                <Card.Title>
+                    <Link className="card-title h5 text-decoration-none" to={"/product?id=" + props.data.id}>{props.data.name}</Link>
+                </Card.Title>
+            </Card.Body>
+            <Card.Footer>
+                <Card.Text>
+                    Giá: {formatter.format(props.data.price)}
+                </Card.Text>
+            </Card.Footer>
+        </Card>
     );
 }
-export default Card;
+export default CardProduct;

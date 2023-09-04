@@ -1,18 +1,25 @@
+import { notification } from "antd";
 import { useCookies } from "react-cookie";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { LoginProps } from "src/common/types/LoginProps";
 import { useFetch } from "src/util/CustomHook";
 
 const LoginAdmin = () => {
+    const [api, contextHolder] = notification.useNotification();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [cookie, setCookie] = useCookies(['admin']);
     const { register, handleSubmit, formState: { errors } } = useForm<LoginProps>();
-
+    const navigate = useNavigate();
     const onSumit = (e: any) => {
         async function init() {
             await useFetch.post("/api/auth/login", e).then(result => {
                 if (result.data.admin) {
                     setCookie("admin", JSON.stringify(result.data));
-                    window.location.href = "http://localhost:3000/admin"
+                    api.success({ message: "Đăng nhập thành công !", description: "Welcome to Zuhot eCommerce" })
+                    setTimeout(() => {
+                        navigate("/admin");
+                    }, 2000);
                 }
                 if (!result.data.admin) {
                     alert("Không có quyền truy cập !!")
@@ -23,6 +30,7 @@ const LoginAdmin = () => {
     }
     return (
         <>
+            {contextHolder}
             <div className="container w-100 mt-5">
                 <ul className="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                     <li className="nav-item" role="presentation">

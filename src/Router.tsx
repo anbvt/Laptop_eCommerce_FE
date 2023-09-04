@@ -7,14 +7,13 @@ import LoginAdmin from "./page/Admin/Login";
 import OrderAdmin from "./page/Admin/Order";
 import OrderDetal from "./page/Admin/Order/OrderDetail";
 import ProductAdmin from "./page/Admin/Product";
-import CartPage from "./page/CartPage";
-import DetailProduct from "./page/DetailProduct";
-import Home from "./page/Home";
-import Login from "./page/Login";
-import MyAccount from "./page/MyAccount";
-import Registration from "./page/Registration/Registration";
-import RegistrationConfirm from "./page/Registration/RegistrationConfirm";
-import SearchPage from "./page/Search/SearchPage";
+import Home from "./page/User/Home";
+import Login from "./page/User/Login";
+import Registration from "./page/User/Registration";
+import DetailProduct from "./page/User/DetailProduct";
+import Search from "./page/User/Search";
+import CartPage from "./page/User/Cart/CartPage";
+import MyAccount from "./page/User/MyAccount";
 
 const admin = [
   {
@@ -61,16 +60,12 @@ const user = [
     element: <Registration />
   },
   {
-    path: "/registrationConfirm",
-    element: <RegistrationConfirm />
-  },
-  {
     path: "/product",
     element: <DetailProduct />
   },
   {
     path: "/search",
-    element: <SearchPage />
+    element: <Search />
   },
   {
     path: "about",

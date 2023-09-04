@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useForm } from 'react-hook-form';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Product } from 'src/common/model/Product';
 import UserLayout from 'src/components/Layout/UserLayout';
 import { useFetch, useQuery } from 'src/util/CustomHook';
 import { formatter } from 'src/util/formatCurrency';
 const DetailProduct = () => {
+    const navigate = useNavigate();
     const [quantity, setQuantity] = useState(1);
     const [cookie] = useCookies(['user']);
     const [data, setData] = useState<Product>();
@@ -16,25 +17,26 @@ const DetailProduct = () => {
 
     useEffect(() => {
         const init = async () => {
-            if(!data){
+            if (!data) {
                 const { data: result } = await useFetch.get("/api/product/" + query.get("id"));
                 setData(result);
             }
 
         }
         init();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const submit = async (data: any) => {
         if (cookie.user) {
-            data = { ...data,quantity:quantity, userId: cookie.user.id };
+            data = { ...data, quantity: quantity, userId: cookie.user.id };
             const { data: result } = await useFetch.post("/api/cart/save", data);
             console.log(result)
-            if (result == 0) {
-                window.location.href = "/cart";
+            if (result === 0) {
+                navigate("/cart");
             }
         } else {
-            window.location.href = "/login";
+            navigate("/login");
         }
 
     }
@@ -60,15 +62,15 @@ const DetailProduct = () => {
                             <div id="carouselExampleControls" className="carousel slide shadow" data-bs-ride="carousel">
                                 <div className="carousel-inner bg-light ">
                                     <div className="carousel-item active">
-                                        <img className="w-100 h-100" src={data?.logo} alt="Image" />
+                                        <img className="w-100 h-100" src={data?.logo} alt="" />
                                     </div>
                                 </div>
-                                <a className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                                     <i className="fa fa-2x fa-angle-left text-dark" />
-                                </a>
-                                <a className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                </button>
+                                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
                                     <i className="fa fa-2x fa-angle-right text-dark" />
-                                </a>
+                                </button>
                             </div>
                         </div>
                         <div className="col-lg-7 h-auto">
@@ -106,16 +108,16 @@ const DetailProduct = () => {
                                 <div className="d-flex pt-2">
                                     <strong className="text-dark mr-2">Share on:</strong>
                                     <div className="d-inline-flex">
-                                        <a className="text-dark px-2" href="">
+                                        <a className="text-dark px-2" href="#1">
                                             <i className="bi bi-facebook" />
                                         </a>
-                                        <a className="text-dark px-2" href="">
+                                        <a className="text-dark px-2" href="#1">
                                             <i className="bi bi-twitter" />
                                         </a>
-                                        <a className="text-dark px-2" href="">
+                                        <a className="text-dark px-2" href="#1">
                                             <i className="bi bi-linkedin" />
                                         </a>
-                                        <a className="text-dark px-2" href="">
+                                        <a className="text-dark px-2" href="#1">
                                             <i className="bi bi-instagram" />
                                         </a>
                                     </div>
@@ -200,7 +202,7 @@ const DetailProduct = () => {
                                             <div className="col-md-6">
                                                 <h4 className="mb-4">1 review for "Product Name"</h4>
                                                 <div className="media mb-4">
-                                                    <img src="img/user.jpg" alt="Image" className="img-fluid mr-3 mt-1" style={{ width: 45 }} />
+                                                    <img src="img/user.jpg" alt="" className="img-fluid mr-3 mt-1" style={{ width: 45 }} />
                                                     <div className="media-body">
                                                         <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
                                                         <div className="text-warning mb-2">

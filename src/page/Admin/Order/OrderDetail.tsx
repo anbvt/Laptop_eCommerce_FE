@@ -13,7 +13,7 @@ const CartItem = ({ object, handleChangeUp, handleDeleteItem, enableButton }: { 
                 <div className="col-lg-3 col-md-12 mb-4 mb-lg-0">
                     {/* Image */}
                     <div className="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                        <img src={object.product.logo} className="w-100" />
+                        <img src={object.product.logo} alt="" className="w-100" />
                         <a href="#!">
                             <div className="mask" style={{ backgroundColor: 'rgba(251, 251, 251, 0.2)' }} />
                         </a>
@@ -100,7 +100,7 @@ const OrderDetal = () => {
         <AdminLayout>
             <h4 className="mt-5">Chi tiết đơn hàng</h4>
             <h6>Id: {data?.id}</h6>
-            <p>Trạng thái: {data?.status == 0 ? "Đang xử lí" : "Đang giao"}</p>
+            <p>Trạng thái: {data?.status === 0 ? "Đang xử lí" : "Đang giao"}</p>
             <p>Đang giao hàng : <Switcher check={data?.status === 1} onToggle={handleSwitcherToggle} /></p>
             <div className="container">
                 {

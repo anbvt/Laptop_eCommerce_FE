@@ -6,8 +6,10 @@ import type { ColumnsType } from 'antd/es/table';
 import { delete_Brands, save_Brands, update_Brands } from "src/api/Brands/route";
 import { Brand } from "src/common/model/Brand";
 import { useFetch } from "src/util/CustomHook";
+import { useNavigate } from "react-router-dom";
 
 function BrandAdmin() {
+    const navigate = useNavigate();
     const [dataSource, setDataSource] = useState<any>();
     useEffect(() => {
         const init = async () => {
@@ -42,7 +44,7 @@ function BrandAdmin() {
             key: "4",
             title: "Hình",
             render: (record: Brand) => (
-                <img src={record.logo} style={{ width: 140, height: 40 }} />
+                <img src={record.logo} alt="" style={{ width: 140, height: 40 }} />
             ),
         },
         {
@@ -76,7 +78,7 @@ function BrandAdmin() {
             onOk: () => {
                 delete_Brands(record.id).then(resp => {
                     if (resp === 200) {
-                        window.location.href = "/admin/brands"
+                        navigate("/admin/brands");
                     }
                     else alert(resp)
                 })
@@ -116,7 +118,7 @@ function BrandAdmin() {
                 onOk={() => {
                     save_Brands(createBrand).then(status => {
                         if (status === 200) {
-                            window.location.href = "/admin/brands"
+                            navigate("/admin/brands");
                         } else {
                             alert(status)
                         }
@@ -167,7 +169,7 @@ function BrandAdmin() {
                 onOk={() => {
                     update_Brands(editBrand?.id, editBrand).then(resp => {
                         if (resp === 200) {
-                            window.location.href = "/admin/brands"
+                            navigate("/admin/brands");
                         } else {
                             alert("Error: " + resp)
                         }

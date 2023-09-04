@@ -1,26 +1,30 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import { useCookies } from "react-cookie";
+import { Link, useNavigate } from 'react-router-dom';
 import "./index.css";
-import { Link } from 'react-router-dom';
-import { useCookies } from "react-cookie"
 const Navbar = () => {
-    const [cookie, setCookie, removeCookie] = useCookies(['user']);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [cookie, setCookie, removeCookie] = useCookies(['user', 'admin']);
 
+    const navigate = useNavigate();
     useEffect(() => {
         if (window.location.pathname.includes("cart")) {
             checkLogin();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cookie]);
 
     const checkLogin = () => {
-        if (cookie.user == null || cookie.user == undefined) {
-            window.location.href = "/login";
+        if (cookie.user == null || cookie.user === undefined) {
+            navigate("/login");
         }
     }
     const logout = () => {
         removeCookie("user");
+        removeCookie("admin");
     }
     return (
-        <div className='navAll'>
+        <div className='navAll' style={{ fontFamily: 'courier, arial, helvetica' }}>
             {/* header */}
             <div className="page-header">
                 <div className="container">
@@ -49,35 +53,35 @@ const Navbar = () => {
                         </div>
                         <ul className="nav nav-divided navbar-nav me-auto ">
                             <li className="nav-item dropdown hovered">
-                                <a className="nav-link dropdown-toggle fw-bolder text-light" data-bs-toggle="dropdown" href="#" aria-expanded="false"><i className='bi bi-currency-dollar me-1'></i>USD</a>
+                                <a className="nav-link dropdown-toggle fw-bolder text-light" data-bs-toggle="dropdown" href="#1" aria-expanded="false"><i className='bi bi-currency-dollar me-1'></i>USD</a>
                                 <div className="dropdown-menu min-w-0">
                                     <a className="dropdown-item" href="#!">USD</a>
                                     <a className="dropdown-item" href="#!">EUR</a>
                                 </div>
                             </li>
                             <li className="nav-item dropdown hovered">
-                                <a className="nav-link dropdown-toggle fw-bolder text-light" data-bs-toggle="dropdown" href="#" aria-expanded="false"><i className='bi bi-translate me-1'></i>English</a>
+                                <a className="nav-link dropdown-toggle fw-bolder text-light" data-bs-toggle="dropdown" href="#1" aria-expanded="false"><i className='bi bi-translate me-1'></i>English</a>
                                 <div className="dropdown-menu min-w-0">
-                                    <a className="dropdown-item" href="#">English</a>
-                                    <a className="dropdown-item" href="#">French</a>
-                                    <a className="dropdown-item" href="#">German</a>
+                                    <a className="dropdown-item" href="#1">English</a>
+                                    <a className="dropdown-item" href="#1">French</a>
+                                    <a className="dropdown-item" href="#1">German</a>
                                 </div>
                             </li>
                         </ul>
 
                         <ul className="nav navbar-nav " style={{ marginRight: "50px" }}>
                             <li className="nav-item">
-                                <a className="nav-link fw-bolder text-light" href=""><i className='bi bi-truck me-1'></i>Shipping</a>
+                                <a className="nav-link fw-bolder text-light" href="#1"><i className='bi bi-truck me-1'></i>Shipping</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link fw-bolder text-light" href=""><i className='bi bi-question me-1'></i>FAQ</a>
+                                <a className="nav-link fw-bolder text-light" href="#1"><i className='bi bi-question me-1'></i>FAQ</a>
                             </li>
                         </ul>
 
                         <ul className="nav navbar-nav flex-row ">
-                            <li className='nav-item'><a className=" nav-link" href="#"><i className='bi bi-facebook text-light'></i></a></li>
-                            <li className='nav-item'><a className=" nav-link" href="#"><i className='bi bi-twitter text-light'></i></a></li>
-                            <li className='nav-item'><a className=" nav-link" href="#"><i className='bi bi-instagram text-light'></i></a></li>
+                            <li className='nav-item'><a className=" nav-link" href="#1"><i className='bi bi-facebook text-light'></i></a></li>
+                            <li className='nav-item'><a className=" nav-link" href="#1"><i className='bi bi-twitter text-light'></i></a></li>
+                            <li className='nav-item'><a className=" nav-link" href="#1"><i className='bi bi-instagram text-light'></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -106,13 +110,7 @@ const Navbar = () => {
                                                     </div>
                                                     <ul className="navbar-nav ms-auto ">
                                                         <li className="nav-item">
-                                                            <a className="nav-link mx-2 text-uppercase fw-bolder" aria-current="page" href="#">Offers</a>
-                                                        </li>
-                                                        <li className="nav-item">
-                                                            <a className="nav-link mx-2 text-uppercase fw-bolder" href="/search">Products</a>
-                                                        </li>
-                                                        <li className="nav-item">
-                                                            <a className="nav-link mx-2 text-uppercase fw-bolder" href="#">About</a>
+                                                            <Link className="nav-link mx-2 text-uppercase fw-bolder" to="/search">Products</Link>
                                                         </li>
                                                     </ul>
                                                     <ul className="navbar-nav ms-auto ">
@@ -120,9 +118,12 @@ const Navbar = () => {
                                                             <Link className="nav-link mx-2 text-uppercase fw-bolder" onClick={checkLogin} to="/cart"><i className="fa-solid fa-cart-shopping me-1" /><i className='bi bi-cart me-1'></i>Giỏ hàng</Link>
                                                         </li>
                                                         <li className="nav-item">
-                                                            <Link className="nav-link mx-2 text-uppercase fw-bolder" to={cookie.user == null || cookie.user == undefined ? "/login" : "/my-account"}><i className="fa-solid fa-circle-user me-1" /><i className='bi bi-person me-1'></i> {cookie.user?.fullname || 'Đăng nhập'}</Link>
+                                                            <Link className="nav-link mx-2 text-uppercase fw-bolder" to={cookie.user == null || cookie.user === undefined ? "/login" : "/my-account"}><i className="fa-solid fa-circle-user me-1" /><i className='bi bi-person me-1'></i> {cookie.user?.fullname || 'Đăng nhập'}</Link>
                                                         </li>
-                                                        <li className={`nav-item ${cookie.user == null || cookie.user == undefined ? 'd-none' : 'd-block'}`}>
+                                                        {cookie.user != null && cookie.user.admin === true && <>
+                                                            <Link className="nav-link mx-2 text-uppercase fw-bolder" to={cookie.admin == null || cookie.admin === undefined ? "/admin/login" : "/admin"}>Manager</Link>
+                                                        </>}
+                                                        <li className={`nav-item ${cookie.user == null || cookie.user === undefined ? 'd-none' : 'd-block'}`}>
                                                             <button onClick={logout} className='nav-link mx-2 text-uppercase fw-bolder'>Đăng xuất</button>
                                                         </li>
                                                     </ul>

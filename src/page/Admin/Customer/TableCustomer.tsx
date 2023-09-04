@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Button, Table, Modal, Input, Form, Radio, Alert } from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { useFetch } from "src/util/CustomHook";
-import Customer from "src/common/model/Customer";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Button, Form, Input, Modal, Radio, Table } from "antd";
 import type { ColumnsType } from 'antd/es/table';
-
-type TablePaginationPosition =
-    | 'bottomCenter';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Customer from "src/common/model/Customer";
+import { useFetch } from "src/util/CustomHook";
 
 const CollectionCreateForm = ({ open, onCreate, onCancel }: any) => {
     const [form] = Form.useForm();
@@ -92,17 +90,17 @@ const CollectionCreateForm = ({ open, onCreate, onCancel }: any) => {
 };
 
 function ProductAdmin() {
+    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const onCreate = (values: any) => {
         console.log('Received values of form: ', values);
         useFetch.post("/api/users/save", values).then(s => { alert("Thêm thành công") }).catch(e => { alert("Lỗi " + e) });
         setOpen(false);
-        window.location.href = "/admin/customer"
+        navigate("/admin/customer");
     };
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [editingCustomer, setEditingCustomer] = useState<any>(null);
     const [dataSource, setDataSource] = useState<any>();
-    const [bot, setbot] = useState<TablePaginationPosition>('bottomCenter');
     useEffect(() => {
         const init = async () => {
             const { data: result } = await useFetch.get(`/api/users/customer`);
@@ -205,7 +203,7 @@ function ProductAdmin() {
             </div>
             <br /><br />
             <Table columns={columns} dataSource={dataSource}
-                pagination={{ position: [bot] }} />
+                pagination={{ position: ['bottomCenter'] }} />
             <Modal
                 title="Chỉnh sửa tài khoản khách hàng"
                 visible={isEditing}

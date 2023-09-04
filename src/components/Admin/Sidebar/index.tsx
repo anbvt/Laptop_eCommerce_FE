@@ -2,7 +2,7 @@ import { AppstoreOutlined, CustomerServiceOutlined, OrderedListOutlined, SketchO
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import React from 'react';
-import { FaEdit, FaHome, FaInfoCircle, FaList, FaListAlt, FaPassport, FaUserAlt } from 'react-icons/fa';
+import { FaEdit, FaHome, FaList, FaListAlt, FaUserAlt } from 'react-icons/fa';
 import { Link, useNavigation } from 'react-router-dom';
 import "./index.css";
 

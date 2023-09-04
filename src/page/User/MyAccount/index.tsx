@@ -1,15 +1,14 @@
-import UserLayout from "src/components/Layout/UserLayout";
-import "./index.css"
-import { useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { useCookies } from "react-cookie";
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { FaHeart, FaMinus, FaPlus, FaTrash } from "react-icons/fa";
-import OrderItem from "./OrderItem";
+import UserLayout from "src/components/Layout/UserLayout";
 import { useFetch } from "src/util/CustomHook";
-import { on } from "stream";
+import OrderItem from "./OrderItem";
+import { useNavigate } from "react-router-dom";
 
 const MyAccount = () => {
+    const navigate = useNavigate();
     const [cookie] = useCookies(['user']);
     const [data, setData] = useState<any>();
     const [user, setUser] = useState<any>();
@@ -31,8 +30,8 @@ const MyAccount = () => {
     }
 
     useEffect(() => {
-        if (cookie.user == null || cookie.user == undefined) {
-            window.location.href = "/login";
+        if (cookie.user == null || cookie.user === undefined) {
+            navigate("/login");
             return;
         } else {
             setUser(cookie.user);
@@ -40,11 +39,8 @@ const MyAccount = () => {
         init();
         dataStatusDxl();
         dataStatusDg();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-
-
-    // console.log(data);
 
     return (
         <UserLayout>
@@ -55,7 +51,7 @@ const MyAccount = () => {
                             <div className="card">
                                 <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: '#000', height: 200 }}>
                                     <div className="ms-4 mt-5 d-flex flex-column" style={{ width: 150 }}>
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp" alt="Generic placeholder image" className="img-fluid img-thumbnail mt-4 mb-2" style={{ width: 150, zIndex: 1 }} />
+                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp" alt="" className="img-fluid img-thumbnail mt-4 mb-2" style={{ width: 150, zIndex: 1 }} />
                                         <button type="button" className="btn btn-outline-dark" data-mdb-ripple-color="dark" style={{ zIndex: 1 }}>
                                             Chỉnh sửa thông tin
                                         </button>
@@ -89,13 +85,13 @@ const MyAccount = () => {
                                             </TabList>
 
                                             <TabPanel >
-                                                {dataStatus0?.length == 0 ? <><div className="justify-content-center d-flex mt-4 text-primary">Không có đơn hàng nào đang xử lý</div></> :
+                                                {dataStatus0?.length === 0 ? <><div className="justify-content-center d-flex mt-4 text-primary">Không có đơn hàng nào đang xử lý</div></> :
                                                     dataStatus0?.map((s: any) => <OrderItem key={s.id} object={s} />)
 
                                                 }
                                             </TabPanel>
                                             <TabPanel >
-                                                {dataStatus1?.length == 0 ? <><div className="justify-content-center d-flex mt-4">Không có đơn hàng nào đang giao</div></> :
+                                                {dataStatus1?.length === 0 ? <><div className="justify-content-center d-flex mt-4">Không có đơn hàng nào đang giao</div></> :
                                                     dataStatus1?.map((s: any) => <OrderItem key={s.id} object={s} />)
                                                 }
                                             </TabPanel>

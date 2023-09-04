@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
-// import "antd/dist/antd.css";
-// import "./App.css";
-import { Button, Table, Modal, Input, Row, Col, Select, Form, Radio } from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Button, Col, Form, Input, Modal, Row, Select, Table } from "antd";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import AdminLayout from "src/components/Layout/AdminLayout";
 import { useFetch } from "src/util/CustomHook";
-import axios from "axios";
 const CollectionCreateForm = ({ open, onCreate, onCancel, brands, colors }: any) => {
   const [form] = Form.useForm();
   return (
@@ -234,6 +232,7 @@ function ProductAdmin() {
     setOpen(false);
   };
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isAdding, setIsAdding] = useState<boolean>(false);
 
   // Modal false khi thêm sản phẩm, và ngược lại
@@ -262,7 +261,7 @@ function ProductAdmin() {
       setColors(response3.data);
     }
     init();
-  }, [page, isEditing, isDeleting, checkModal]);
+  }, [page, isEditing, isDeleting, checkModal, brands]);
 
   const columns = [
     {
@@ -309,7 +308,7 @@ function ProductAdmin() {
       key: "10",
       title: "Hình",
       render: (record: any) => (
-        <img src={record.logo} style={{ maxWidth: 50 }} />
+        <img src={record.logo} alt="" style={{ maxWidth: 50 }} />
       ),
     },
     {

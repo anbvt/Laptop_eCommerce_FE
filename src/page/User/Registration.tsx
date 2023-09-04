@@ -1,20 +1,23 @@
-import { useCookies } from "react-cookie";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { RegisterProps } from "src/common/types/RegisterProps";
 import { useFetch } from "src/util/CustomHook";
-import Input from "../../components/Input";
+import Input from "src/components/Input";
+import { useNavigate } from "react-router-dom";
+import { notification } from "antd";
 
 const Registration = () => {
-    const [cookie, setCookie] = useCookies(['user']);
+    const [api, contextHolder] = notification.useNotification();
     const { register, handleSubmit, formState: { errors } } = useForm<RegisterProps>();
-
+    const navigate = useNavigate();
     const onSubmit: SubmitHandler<RegisterProps> = (data) => {
         async function init() {
             if (data.password === data.repassword) {
                 await useFetch.post("/api/auth/registration", data).then(result => {
-                    alert(result.data)
-                    window.location.href = "/registrationConfirm"
-                }).catch(errors => alert(errors.response.data.message))
+                    api.success({ message: result.data, description: "Vui lòng kiểm tra email để kích hoạt tài khoản !" })
+                    setTimeout(() => {
+                        navigate("/");
+                    }, 2000);
+                }).catch(errors => api.error({ message: errors.response.data.message }))
             } else {
                 alert("Mật không khớp vui lòng thử lại !")
             }
@@ -24,6 +27,7 @@ const Registration = () => {
 
     return (
         <>
+            {contextHolder}
             <div className="container-fluid bg-white" style={{ paddingBlock: "20px", height: "100vh" }}>
                 <div className="row">
                     <div className="col-md-1 col-lg-1"></div>

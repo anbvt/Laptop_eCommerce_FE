@@ -4,7 +4,9 @@ import { SyncLoader } from "react-spinners";
 import Card from "src/components/Card";
 import Carousel from "src/components/Carousel";
 import { useFetch } from "src/util/CustomHook";
-import UserLayout from "../components/Layout/UserLayout";
+import UserLayout from "src/components/Layout/UserLayout";
+import { Col, Row } from "react-bootstrap";
+
 const Home = () => {
   const [data, setData] = useState<any>();
   const [page, setPage] = useState(0);
@@ -28,15 +30,17 @@ const Home = () => {
             <div className="card-body">
               <div className="row w-100 m-auto p-3">
                 <h4 className="card-title text-danger">Khuyến mãi HOT 💥</h4>
-                {
-                  data?.content?.map((s: any, key: any) => {
-                    return (
-                      <div key={key} className="col-4">
-                        <Card id={s.id} className="mt-3" data={s} />
-                      </div>
-                    )
-                  })
-                }
+                <Row>
+                  {
+                    data?.content?.map((s: any, key: any) => {
+                      return (
+                        <Col key={key} md="4">
+                          <Card id={s.id} className="mt-3" data={s} />
+                        </Col>
+                      )
+                    })
+                  }
+                </Row>
               </div>
               <div className="row mt-1">
                 <span className="text-center">

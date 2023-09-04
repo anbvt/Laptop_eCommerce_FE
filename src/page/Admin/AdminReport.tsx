@@ -1,11 +1,8 @@
-import AdminLayout from "src/components/Layout/AdminLayout";
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { ProductReport } from "src/common/model/ProductReport";
+import { useEffect, useState } from 'react';
 import Users from "src/common/model/Customer";
-import { useFetch } from "src/util/CustomHook";
-import axios from "axios";
 import { Product } from "src/common/model/Product";
+import { ProductReport } from "src/common/model/ProductReport";
+import { useFetch } from "src/util/CustomHook";
 
 const AdminHome = () => {
   const [data, setData] = useState<ProductReport[]>();

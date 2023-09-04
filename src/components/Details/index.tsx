@@ -19,8 +19,8 @@ const Details = () => {
                 <div className="row px-xl-5 ">
                     <div className="col-12 ">
                         <nav className="breadcrumb mb-30 bg-light shadow px-4 mt-3" style={{ height: "40px" }}>
-                            <a className="breadcrumb-item text-dark" style={{ lineHeight: "40px" }} href="#">Home</a>
-                            <a className="breadcrumb-item text-dark" style={{ lineHeight: "40px" }} href="#">Shop</a>
+                            <a className="breadcrumb-item text-dark" style={{ lineHeight: "40px" }} href="#1">Home</a>
+                            <a className="breadcrumb-item text-dark" style={{ lineHeight: "40px" }} href="#1">Shop</a>
                             <span className="breadcrumb-item active" style={{ lineHeight: "40px" }}>Shop Detail</span>
                         </nav>
                     </div>
@@ -34,24 +34,24 @@ const Details = () => {
                         <div id="carouselExampleControls" className="carousel slide shadow" data-bs-ride="carousel">
                             <div className="carousel-inner bg-light ">
                                 <div className="carousel-item active">
-                                    <img className="w-100 h-100" src="img/product-1.jpg" alt="Image" />
+                                    <img className="w-100 h-100" src="img/product-1.jpg" alt="" />
                                 </div>
                                 <div className="carousel-item">
-                                    <img className="w-100 h-100" src="img/product-2.jpg" alt="Image" />
+                                    <img className="w-100 h-100" src="img/product-2.jpg" alt="" />
                                 </div>
                                 <div className="carousel-item">
-                                    <img className="w-100 h-100" src="img/product-3.jpg" alt="Image" />
+                                    <img className="w-100 h-100" src="img/product-3.jpg" alt="" />
                                 </div>
                                 <div className="carousel-item">
-                                    <img className="w-100 h-100" src="img/product-4.jpg" alt="Image" />
+                                    <img className="w-100 h-100" src="img/product-4.jpg" alt="" />
                                 </div>
                             </div>
-                            <a className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                                 <i className="fa fa-2x fa-angle-left text-dark" />
-                            </a>
-                            <a className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            </button>
+                            <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
                                 <i className="fa fa-2x fa-angle-right text-dark" />
-                            </a>
+                            </button>
                         </div>
                     </div>
                     <div className="col-lg-7 h-auto">
@@ -137,16 +137,16 @@ const Details = () => {
                             <div className="d-flex pt-2">
                                 <strong className="text-dark mr-2">Share on:</strong>
                                 <div className="d-inline-flex">
-                                    <a className="text-dark px-2" href="">
+                                    <a className="text-dark px-2" href="#1">
                                         <i className="bi bi-facebook" />
                                     </a>
-                                    <a className="text-dark px-2" href="">
+                                    <a className="text-dark px-2" href="#1">
                                         <i className="bi bi-twitter" />
                                     </a>
-                                    <a className="text-dark px-2" href="">
+                                    <a className="text-dark px-2" href="#1">
                                         <i className="bi bi-linkedin" />
                                     </a>
-                                    <a className="text-dark px-2" href="">
+                                    <a className="text-dark px-2" href="#1">
                                         <i className="bi bi-instagram" />
                                     </a>
                                 </div>
@@ -229,7 +229,7 @@ const Details = () => {
                                         <div className="col-md-6">
                                             <h4 className="mb-4">1 review for "Product Name"</h4>
                                             <div className="media mb-4">
-                                                <img src="img/user.jpg" alt="Image" className="img-fluid mr-3 mt-1" style={{ width: 45 }} />
+                                                <img src="img/user.jpg" alt="" className="img-fluid mr-3 mt-1" style={{ width: 45 }} />
                                                 <div className="media-body">
                                                     <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
                                                     <div className="text-warning mb-2">

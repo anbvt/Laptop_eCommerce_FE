@@ -2,27 +2,34 @@ import { useCookies } from "react-cookie";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { LoginProps } from "src/common/types/LoginProps";
 import { useFetch } from "src/util/CustomHook";
-import Input from "../components/Input";
+import Input from "src/components/Input";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { notification } from 'antd';
 
 const Login = () => {
+    const [api, contextHolder] = notification.useNotification();
+    const navigate = useNavigate();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [cookie, setCookie] = useCookies(['user']);
     const { register, handleSubmit, formState: { errors } } = useForm<LoginProps>();
     const onSubmit: SubmitHandler<LoginProps> = (data) => {
         async function init() {
             await useFetch.post("/api/auth/login", data).then(result => {
-                // if (data.remember) {
-                //     document.cookie = `user=${JSON.stringify(result.data)}`
-                // }
                 setCookie("user", JSON.stringify(result.data));
-                window.location.href = "http://localhost:3000/"
-            }).catch(errors => alert(errors.response.data.message))
+                api.success({ message: "Đăng nhập thành công !", description: "Welcome to Zuhot eCommerce" })
+                setTimeout(() => {
+                    navigate("/");
+                }, 2000);
+            }).catch(errors => api.error({ message: errors.response.data.message }))
         }
         init();
     };
 
     return (
         <>
-            <div className="container-fluid bg-white" style={{ paddingBlock: "120px", height: "100vh" }}>
+            {contextHolder}
+            <div className="container-fluid bg-white" style={{ paddingBlock: "120px", height: "100vh", fontFamily: 'courier, arial, helvetica' }}>
                 <div className="row">
                     <div className="col-md-1 col-lg-1"></div>
                     <div className="col-12 col-sm-12 col-md-6 col-lg-7" style={{ backgroundImage: `url(https://e1.pxfuel.com/desktop-wallpaper/782/567/desktop-wallpaper-laptop-repair-computer-shop-background.jpg)`, objectFit: "fill", backgroundRepeat: "no-repeat" }}></div>
@@ -62,13 +69,13 @@ const Login = () => {
                                     </div>
                                     {/* Register */}
                                     <div className="form-check">
-                                        <a href="/registration" className="form-check-label"> Đăng ký </a>
+                                        <Link to="/registration" className="form-check-label"> Đăng ký </Link>
                                     </div>
                                 </div>
                             </div>
                             {/* Submit button */}
                             <div className="row">
-                                <button type="submit" className="btn btn-default border border-info rounded-3 btn-block mb-4">Sign in</button>
+                                <button type="submit" className="btn btn-default border rounded-3 btn-block mb-4">Sign in</button>
                             </div>
                         </form>
                     </div>

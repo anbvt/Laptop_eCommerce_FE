@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaHeart, FaMinus, FaPlus, FaTrash } from "react-icons/fa";
+import { FaHeart, FaTrash } from "react-icons/fa";
 import { formatter } from "src/util/formatCurrency";
 
 const ProductItem = ({ object, quantity }: any) => {
@@ -9,7 +9,7 @@ const ProductItem = ({ object, quantity }: any) => {
                 <div className="col-lg-3 col-md-12 mb-4 mb-lg-0">
                     {/* Image */}
                     <div className="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                        <img src={object.logo} className="w-100" />
+                        <img src={object.logo} alt="" className="w-100" />
                         <a href="#!">
                             <div className="mask" style={{ backgroundColor: 'rgba(251, 251, 251, 0.2)' }} />
                         </a>
