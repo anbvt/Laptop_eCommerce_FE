@@ -8,7 +8,7 @@ const useQuery = () => {
     return React.useMemo(() => new URLSearchParams(search), [search]);
 }
 const useFetch = axios.create({
-    baseURL: "http://localhost:8080"
+    baseURL: "https://laptopecommercebe-production.up.railway.app"
 });
 
 export {
