@@ -3,13 +3,13 @@ const Carousel = () => {
         <div id="carouselExample" className="carousel slide">
             <div className="carousel-inner">
                 <div className="carousel-item active">
-                    <img src="https://github.com/anbvt/Laptop_eCommerce_FE/blob/master/public/img/Background.png" className="d-block w-100" alt="..." />
+                    <img src="https://raw.githubusercontent.com/anbvt/Laptop_eCommerce_FE/refs/heads/master/public/img/Background.png" className="d-block w-100" alt="..." />
                 </div>
                 <div className="carousel-item">
-                    <img src="https://github.com/anbvt/Laptop_eCommerce_FE/blob/master/public/img/Background.png" className="d-block w-100" alt="..." />
+                    <img src="https://raw.githubusercontent.com/anbvt/Laptop_eCommerce_FE/refs/heads/master/public/img/Background.png" className="d-block w-100" alt="..." />
                 </div>
                 <div className="carousel-item">
-                    <img src="https://github.com/anbvt/Laptop_eCommerce_FE/blob/master/public/img/Background.png" className="d-block w-100" alt="..." />
+                    <img src="https://raw.githubusercontent.com/anbvt/Laptop_eCommerce_FE/refs/heads/master/public/img/Background.png" className="d-block w-100" alt="..." />
                 </div>
             </div>
             <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
